@@ -1,4 +1,8 @@
-
+<%
+    if(session.getAttribute("userNewSession") != null) {
+        response.sendRedirect("home.jsp");
+    }
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,10 +25,10 @@
             <form action="LoginController" method="post">
             <div class="itens-login">
                 <h1 id="login-login">Login</h1>
-            <label class="username" for="name">
+            <label class="username" for="user">
                 Username
                 <br>
-                <input class="texto-login" type="text" id="name" name="name">
+                <input class="texto-login" type="text" id="user" name="user">
                 <br>
                 <label for="pass">
                     Password

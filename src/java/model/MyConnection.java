@@ -9,7 +9,7 @@ public class MyConnection {
         String driver = "com.mysql.jdbc.Driver";
         Class.forName(driver);
         Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/test",
+                "jdbc:mysql://localhost:3307/usuario",
                 "root",
                 ""
         );

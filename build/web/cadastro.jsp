@@ -1,5 +1,5 @@
 
-
+<%@include file="session/verify.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@
         <title>GL Dev / Login</title>
     </head>
    <body class="corpo">
-<form action="index.html" method="post">
+<form action="UsuarioController" method="post">
     <div class="cadastro">
         
         <h1 class="titulo-login">Cadastrar</h1>

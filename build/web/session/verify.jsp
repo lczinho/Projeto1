@@ -1,4 +1,5 @@
-<% 
-    session.invalidate();
-    response.sendRedirect("../index.jsp");
+<%
+    if(session.getAttribute("userSession") == null) {
+        response.sendRedirect(request.getContextPath());
+    }
 %>

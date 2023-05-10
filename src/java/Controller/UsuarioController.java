@@ -1,4 +1,5 @@
-package controller;
+
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,45 +8,46 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import model.UserDAO;
 import model.Usuario;
 
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-    //Atributos
-    private String user;
-     private String email;
+
+@WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
+public class UsuarioController extends HttpServlet {
+    private String nome;
+    private String email;
     private String senha;
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+       
+        this.nome = request.getParameter("nome");
+        this.nome = request.getParameter("email");
+        this.nome = request.getParameter("senha");
         
-        this.user = request.getParameter("user");
-        this.senha = request.getParameter("pass");
+        Usuario usuario = new Usuario(this.nome, this.email, this.senha);
         
-        Usuario newUsuario = new Usuario(this.user, this.email, this.senha);
         
-        if(newUsuario.isLogged()) {
-            HttpSession session = request.getSession();
-            session.setAttribute("userSession", newUsuario);
-            //request.setAttribute("userRequest", newUsuario);
-            request.getRequestDispatcher("index.jsp")
-                    .forward(request, response);
-        } else {
+        try{
+            UserDAO exDAO =  new UserDAO();
+            exDAO.insertUsuario(usuario);
+            response.sendRedirect("home.jsp");
+        }catch (SQLException | ClassNotFoundException erro) {
+        
+        
         
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>GLDev</title>");            
+            out.println("<title>Servlet UsuarioController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<script>");
-            out.println("alert('Acesso negado!');");
-            out.println("window.location.replace('home.jsp');");
-            out.println("</script>");
+            out.println("<h1>Servlet UsuarioController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
