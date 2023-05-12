@@ -23,7 +23,7 @@
             <img src="./img/logod.png" alt="">
         </div>
         <div class="aplications">
-            <a href="#" class="home">PARA EMPRESAS</a>
+            <a href="lista.jsp" class="home">PARA EMPRESAS</a>
             <a href="login.jsp" class="home">ENTRAR</a>
             <a href="cadastro.jsp" class="home">INSCREVA-SE</a>
         </div>

@@ -13,7 +13,7 @@ import model.Usuario;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
     //Atributos
-    private String user;
+    private String nome;
      private String email;
     private String senha;
     
@@ -21,14 +21,14 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        this.user = request.getParameter("user");
+        this.nome = request.getParameter("nome");
         this.senha = request.getParameter("pass");
         
-        Usuario newUsuario = new Usuario(this.user, this.email, this.senha);
+        Usuario newUsuario = new Usuario(this.nome, this.email, this.senha);
         
         if(newUsuario.isLogged()) {
             HttpSession session = request.getSession();
-            session.setAttribute("userSession", newUsuario);
+            session.setAttribute("nomeSession", newUsuario);
             //request.setAttribute("userRequest", newUsuario);
             request.getRequestDispatcher("index.jsp")
                     .forward(request, response);

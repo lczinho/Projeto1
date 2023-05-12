@@ -28,12 +28,12 @@
             <label class="username" for="user">
                 Username
                 <br>
-                <input class="texto-login" type="text" id="user" name="user">
+                <input class="texto-login" type="text" id="nome" name="nome">
                 <br>
                 <label for="pass">
                     Password
                     <br>
-                    <input class="texto-login" type="password" id="pass" name="pass">
+                    <input class="texto-login" type="password" id="senha" name="senha">
                     <br>
                     <a id="esqueceu-login" href="#"> <strong class="visible">ffffffffffffffffffffffffffffffffffffff</strong>  Esqueceu sua senha?</a>   
                     <br>                                      

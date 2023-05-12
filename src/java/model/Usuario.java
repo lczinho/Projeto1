@@ -5,6 +5,10 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    
+    public Usuario(){
+    
+    }
 
     public int getCodUsuario() {
         return codUsuario;
