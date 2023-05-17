@@ -62,4 +62,41 @@ public class UserDAO {
     prep.close();
   }
   
+  //Atualizar registros do BD
+  public void updateUsuario(Usuario ex) throws SQLException{
+     String query = "UPDATE logins SET login = ?, "
+             + "senha = ?, email = ?"
+             + "WHERE idUsuario = ?"; 
+     
+     
+      PreparedStatement prep = conn.prepareCall(query);
+      
+      prep.setString(1, ex.getNome());
+      prep.setString(2, ex.getSenha());
+      prep.setString(3, ex.getEmail());
+      prep.setString(4, ex.getidUsuario());
+      
+      //Executando query pronta no BD
+      prep.execute();
+      prep.close();
+  }
+  
+  //Selecionar um registo apenas
+  public Usuario listOneUsuario(int i) throws SQLException{
+      String query = "Select * FROM logins " + "WHERE idUsuario = " + i;
+      
+      PreparedStatement prep =  conn.prepareCall(query);
+      ResultSet result = prep.executeQuery();
+     
+      Usuario ex = new Usuario();
+      if(result.next()){
+          ex.setCodUsuario(result.getInt("idUsuario"));
+          ex.setNome(result.getString("nome"));
+          ex.setSenha(result.getString("senha"));
+          ex.setEmail(result.getString("email"));
+      }
+      
+      return ex;
+}
+  
 }//fim da classe

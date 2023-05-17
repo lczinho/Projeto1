@@ -1,7 +1,7 @@
 package model;
 
 public class Usuario {
-    private int codUsuario;
+    private int idUsuario;
     private String nome;
     private String email;
     private String senha;
@@ -11,11 +11,11 @@ public class Usuario {
     }
 
     public int getCodUsuario() {
-        return codUsuario;
+        return idUsuario;
     }
 
-    public void setCodUsuario(int codUsuario) {
-        this.codUsuario = codUsuario;
+    public void setCodUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -50,5 +50,9 @@ public class Usuario {
 
     public boolean isLogged() {
         return (this.nome.equals("user") && this.senha.equals("1234"));
+    }
+
+    String getidUsuario() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -29,10 +29,10 @@
                     <td>%= item.getsenha() %></td>
                     <td>%= item.getemail() %></td>
                     <td>
-                        <a href="#editar">😈</a>
+                        <a href="UpdateUsuario?cod=<%= item.getidUsuario() %>">😈</a>
                     </td>
                     <td>
-                        <a href="#deletar">❌</a>
+                        <a onclick="confirmDelete(<%= item.idUsuario()%>)">❌</a>
                     </td>
                     
                 </tr>
@@ -41,5 +41,13 @@
                 %>
             </tbody>
         </table>
+            <script>
+                function confirmDelete(cod){
+                    if(confirm("Deseja realmente excluir?")){
+                        window.location.replace("DeleteUsuario?cod= " + cod);
+                    } else{
+                        alert("Exclusão cancelada");
+                    }
+            </script>
     </body>
 </html>
