@@ -8,17 +8,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import model.Usuario;
 
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
+
     //Atributos
     private String nome;
-     private String email;
+    private String email;
     private String senha;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         this.nome = request.getParameter("nome");
@@ -26,29 +28,35 @@ public class LoginController extends HttpServlet {
         
         Usuario newUsuario = new Usuario(this.nome, this.email, this.senha);
         
-        if(newUsuario.isLogged()) {
-            HttpSession session = request.getSession();
-            session.setAttribute("nomeSession", newUsuario);
-            //request.setAttribute("userRequest", newUsuario);
-            request.getRequestDispatcher("index.jsp")
-                    .forward(request, response);
-        } else {
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>GLDev</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script>");
-            out.println("alert('Acesso negado!');");
-            out.println("window.location.replace('home.jsp');");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        try {
+            
+            if (newUsuario.isLogged()) {
+                HttpSession session = request.getSession();
+                session.setAttribute("nomeSession", newUsuario);
+                //request.setAttribute("userRequest", newUsuario);
+                request.getRequestDispatcher("index.jsp")
+                        .forward(request, response);
+            } else {
+                
+                try (PrintWriter out = response.getWriter()) {
+                    /* TODO output your page here. You may use following sample code. */
+                    out.println("<!DOCTYPE html>");
+                    out.println("<html>");
+                    out.println("<head>");
+                    out.println("<title>GLDev</title>");                    
+                    out.println("</head>");
+                    out.println("<body>");
+                    out.println("<script>");
+                    out.println("alert('Acesso negado!');");
+                    out.println("window.location.replace('home.jsp');");
+                    out.println("</script>");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            }
+        } catch (SQLException | ClassNotFoundException erro) {
+            PrintWriter out = response.getWriter();
+            out.print("Ocorreu algum erro:(");
         }
     }
 

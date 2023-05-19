@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.SQLException;
+
 public class Usuario {
     private int idUsuario;
     private String nome;
@@ -47,9 +49,27 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
     }
+    
+    
+     public Usuario( int cod, String nome, String email, String senha) {
+        this.idUsuario = cod;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 
-    public boolean isLogged() {
-        return (this.nome.equals("user") && this.senha.equals("1234"));
+    public boolean isLogged() throws ClassNotFoundException, SQLException {
+        UserDAO udao = new UserDAO();
+        Usuario uBanco = udao.listOneUsuario(this.idUsuario);
+                
+        
+        if(uBanco.getNome()!= null){
+            //Nome de usuario encontrado e verifica a senha
+            return(this.senha.equals(uBanco.getSenha()));
+        }else{
+            return false;
+        }
+        
     }
 
     String getidUsuario() {

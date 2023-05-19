@@ -1,4 +1,3 @@
-
 package Controller;
 
 import java.io.IOException;
@@ -10,40 +9,44 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import model.UserDAO;
+import model.Usuario;
 
 
-@WebServlet(name = "DeleteExame", urlPatterns = {"/DeleteExame"})
-public class DeleteExame extends HttpServlet {
 
-    
+@WebServlet(name = "UpdateUsuario", urlPatterns = {"/UpdateUsuario"})
+public class UpdateUsuario extends HttpServlet {
+
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         int cod = Integer.parseInt(request.getParameter("cod"));
         
+           try {
+            UserDAO edao = new UserDAO();
+            Usuario ex = edao.listOneUsuario(cod);
+            request.setAttribute("usuario", ex);
+            request.getRequestDispatcher("edit-usuario.jsp")
+                    .forward(request, response);
+            
+        } catch(SQLException | ClassNotFoundException error) {
         
-        
-        try{
-            UserDAO udao = new UserDAO();
-            udao.deleteUsuario(cod);
-            response.sendRedirect("lista.jsp");
-        }catch(SQLException | ClassNotFoundException error) {
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteExame</title>");            
+            out.println("<title>Servlet UpdateUsuario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Erro na exclusão  <hr> </h1>");
-               out.println("<h5>" + error + "</h5>");
+            out.println("<h1>Erro na edição :( <hr></h1>");
+            out.println("<h5>"+ error +"</h5>");
             out.println("</body>");
             out.println("</html>");
         }
-        }
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

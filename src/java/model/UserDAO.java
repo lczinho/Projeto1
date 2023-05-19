@@ -13,7 +13,7 @@ public class UserDAO {
   conn = MyConnection.getConnection();
   }
   
-  //Metodos do curd para a tabela exame
+  //Metodos do cruid para a tabela exame
   public void insertUsuario(Usuario ex){
   String sql = "INSERT INTO usuario(nome, email, senha)" + "VALUES (?, ?, ?)";
   

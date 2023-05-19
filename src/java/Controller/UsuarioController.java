@@ -15,6 +15,7 @@ import model.Usuario;
 
 @WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
 public class UsuarioController extends HttpServlet {
+    private int cod;
     private String nome;
     private String email;
     private String senha;
@@ -23,18 +24,28 @@ public class UsuarioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        if(request.getParameter("cod")!= null){
+            this.cod = Integer.parseInt(request.getParameter("cod"));
+        }
        
         this.nome = request.getParameter("nome");
         this.nome = request.getParameter("email");
         this.nome = request.getParameter("senha");
-        
-        Usuario usuario = new Usuario(this.nome, this.email, this.senha);
-        
+       
         
         try{
+        if(request.getParameter("cod") == null){
+        Usuario usuario = new Usuario(this.nome, this.email, this.senha);
             UserDAO exDAO =  new UserDAO();
             exDAO.insertUsuario(usuario);
             response.sendRedirect("home.jsp");
+        }else {
+         Usuario usuario = new Usuario(this.cod, this.nome, this.email, this.senha);
+            UserDAO exDAO =  new UserDAO();
+            exDAO.updateUsuario(usuario);
+            response.sendRedirect("lista.jsp");
+        }
         }catch (SQLException | ClassNotFoundException erro) {
         
         
