@@ -18,7 +18,7 @@ public class UpdateUsuario extends HttpServlet {
 
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         int cod = Integer.parseInt(request.getParameter("cod"));

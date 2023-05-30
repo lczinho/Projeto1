@@ -4,7 +4,6 @@
     Usuario userSession =  (Usuario) session.getAttribute("userSession");
 %>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -53,7 +52,7 @@
                 <br>
                 <li>Encaminhamento para empregos</li> 
             </ul>
-            <a href="cadastro.html"><input id="botao" type="button" value="Quero fazer o curso"></a>
+            <a href="cadastro.jsp"><input id="botao" type="button" value="Quero fazer o curso"></a>
             
         </div>
 

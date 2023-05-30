@@ -1,4 +1,3 @@
-
 <%@page import="model.UserDAO"%>
 <%@page import="model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,20 +19,21 @@
             </thead>
             <tbody>
               <%
-              UserDAO e = new UserDao();
-              for(Usuario item : e.listUsuario())
+                UserDAO e = new UserDAO();
+                for(Usuario item : e.listUsuario()) {
               %>
                 <tr>
-                    <td>%= item.getidUsuario() %></td>
-                    <td>%= item.getnome() %></td>
-                    <td>%= item.getsenha() %></td>
-                    <td>%= item.getemail() %></td>
+                    <td><%= item.getCodUsuario() %></td>
+                    <td><%= item.getNome() %></td>
+                    <td><%= item.getEmail() %></td>
+                    <td><%= item.getSenha() %></td>
                     <td>
-                        <a href="UpdateUsuario?cod=<%= item.getidUsuario() %>">😈</a>
+                        <a href="UpdateUsuario?cod=<%= item.getCodUsuario() %>">😈</a>
                     </td>
                     <td>
-                        <a onclick="confirmDelete(<%= item.idUsuario()%>)">❌</a>
+                        <a onclick="confirmDelete(<%= item.getCodUsuario()%>);">❌</a>
                     </td>
+                    
                     
                 </tr>
                 <%
@@ -44,10 +44,12 @@
             <script>
                 function confirmDelete(cod){
                     if(confirm("Deseja realmente excluir?")){
-                        window.location.replace("DeleteUsuario?cod= " + cod);
+                        window.location.replace("DeleteExame?cod=" + cod);
                     } else{
                         alert("Exclusão cancelada");
                     }
+                }
             </script>
+               <a href="index.jsp">Página inicial</a>
     </body>
 </html>

@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import model.UserDAO;
 import model.Usuario;
 
-
 @WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
 public class UsuarioController extends HttpServlet {
     private int cod;
@@ -20,7 +19,6 @@ public class UsuarioController extends HttpServlet {
     private String email;
     private String senha;
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,8 +28,8 @@ public class UsuarioController extends HttpServlet {
         }
        
         this.nome = request.getParameter("nome");
-        this.nome = request.getParameter("email");
-        this.nome = request.getParameter("senha");
+        this.email = request.getParameter("email");
+        this.senha = request.getParameter("senha");
        
         
         try{
@@ -39,7 +37,7 @@ public class UsuarioController extends HttpServlet {
         Usuario usuario = new Usuario(this.nome, this.email, this.senha);
             UserDAO exDAO =  new UserDAO();
             exDAO.insertUsuario(usuario);
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("index.jsp");
         }else {
          Usuario usuario = new Usuario(this.cod, this.nome, this.email, this.senha);
             UserDAO exDAO =  new UserDAO();
@@ -47,8 +45,7 @@ public class UsuarioController extends HttpServlet {
             response.sendRedirect("lista.jsp");
         }
         }catch (SQLException | ClassNotFoundException erro) {
-        
-        
+          
         
         try (PrintWriter out = response.getWriter()) {
             

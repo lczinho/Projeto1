@@ -11,6 +11,24 @@ public class Usuario {
     public Usuario(){
     
     }
+    
+    public Usuario(String nome, String senha) {
+        this.nome = nome;
+        this.senha = senha;
+    }
+    
+    public Usuario(String nome, String senha, String email) {
+        this.nome = nome;
+        this.senha = senha;
+        this.email = email;
+    }
+    
+    public Usuario(int cod, String nome, String email, String senha) {
+        this.idUsuario = cod;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 
     public int getCodUsuario() {
         return idUsuario;
@@ -42,27 +60,12 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Usuario(String nome, String email, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
-    
-    
-     public Usuario( int cod, String nome, String email, String senha) {
-        this.idUsuario = cod;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
+    }   
 
     public boolean isLogged() throws ClassNotFoundException, SQLException {
         UserDAO udao = new UserDAO();
         Usuario uBanco = udao.listOneUsuario(this.idUsuario);
                 
-        
         if(uBanco.getNome()!= null){
             //Nome de usuario encontrado e verifica a senha
             return(this.senha.equals(uBanco.getSenha()));
@@ -72,7 +75,4 @@ public class Usuario {
         
     }
 
-    String getidUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

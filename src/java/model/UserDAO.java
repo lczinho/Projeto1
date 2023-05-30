@@ -15,7 +15,7 @@ public class UserDAO {
   
   //Metodos do cruid para a tabela exame
   public void insertUsuario(Usuario ex){
-  String sql = "INSERT INTO usuario(nome, email, senha)" + "VALUES (?, ?, ?)";
+  String sql = "INSERT INTO logins(login, email, senha) VALUES (?, ?, ?)";
   
   try{
   PreparedStatement prep = conn.prepareCall(sql);
@@ -44,7 +44,7 @@ public class UserDAO {
           Usuario e = new Usuario();
           
           e.setCodUsuario(result.getInt("idUsuario"));
-           e.setNome(result.getString("nome"));
+           e.setNome(result.getString("login"));
             e.setSenha(result.getString("senha"));
              e.setEmail(result.getString("email"));
              
@@ -74,7 +74,7 @@ public class UserDAO {
       prep.setString(1, ex.getNome());
       prep.setString(2, ex.getSenha());
       prep.setString(3, ex.getEmail());
-      prep.setString(4, ex.getidUsuario());
+      prep.setInt(4, ex.getCodUsuario());
       
       //Executando query pronta no BD
       prep.execute();
@@ -91,7 +91,7 @@ public class UserDAO {
       Usuario ex = new Usuario();
       if(result.next()){
           ex.setCodUsuario(result.getInt("idUsuario"));
-          ex.setNome(result.getString("nome"));
+          ex.setNome(result.getString("login"));
           ex.setSenha(result.getString("senha"));
           ex.setEmail(result.getString("email"));
       }

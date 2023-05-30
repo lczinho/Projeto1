@@ -1,6 +1,6 @@
 <%
     if(session.getAttribute("userNewSession") != null) {
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("index.jsp");
     }
 %>
 
@@ -22,10 +22,12 @@
         </div>
 
         <div class="right-login">
+            
             <form action="LoginController" method="post">
+            
             <div class="itens-login">
                 <h1 id="login-login">Login</h1>
-            <label class="username" for="user">
+                <label class="username" for="user">
                 Username
                 <br>
                 <input class="texto-login" type="text" id="nome" name="nome">
@@ -40,7 +42,8 @@
                     <input id="bottom" type="submit" value="Entrar">
                     <h3>Não tem uma conta? <a id="inscrever-login" href="cadastro.jsp">Increver-se</a></h3>
                 </div>
-                </form>
+                
+            </form>
                 
         </div>
     </div>

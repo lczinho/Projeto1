@@ -1,4 +1,4 @@
-<%@include file="model.Usuario" %>
+<%@page import="model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -15,35 +15,22 @@
         <h1>Edição</h1>
         <hr>
         <form action="UsuarioController" method="post">
-            <input type="text" name="cod" value="<%= e.getNome() %>" readonly>
+            <input type="text" name="cod" value="<%= e.getCodUsuario() %>" readonly>
             <br><br>
             
-            <input type="text" name="exame" value="<%= e.getEmail()%>"  required>
+            <input type="text" name="nome" value="<%= e.getNome() %>" required>
             <br><br>
             
-            <input type="text" name="valor" value="<%= e.getSenha()%>" required >
+            <input type="text" name="email" value="<%= e.getEmail()%>"  required>
             <br><br>
-    <div class="cadastro">
-        
-        <h1 class="titulo-login">Cadastrar</h1>
-        <label class="name-login" for="nome">Nome</label>
-        <br>
-        <input class="nome-login" type="text" name="nome" placeholder="Username">
-        <br>
-        <label class="gmail-login" for="email">Email</label>
-        <br>
-        <input class="email-login" type="text" name="email" placeholder="Email">
-        <br>
-        <label class="pass-login" for="senha">Senha</label>
-        <br>
-        <input class="senha-login" type="password" name="senha" placeholder="Password">
-        <br><br>
-        
-    </div>
+            
+            <input type="text" name="senha" value="<%= e.getSenha()%>" required >
             <br><br>
+    
+            
             <input type="submit" value="Atualizar">
         </form>
         <hr>
-        <a href="home.jsp">Página inicial</a>
+        <a href="index.jsp">Página inicial</a>
     </body>
 </html>

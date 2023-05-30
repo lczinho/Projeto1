@@ -2,6 +2,7 @@ package model;
 
 public class User {
     //Atributos
+    private int userId;
     private String userName;
     private String userPass;
     private String userCpf;
@@ -13,6 +14,15 @@ public class User {
     }
     
     //Getters & Setters
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+        
     public String getUserName() {
         return userName;
     }
